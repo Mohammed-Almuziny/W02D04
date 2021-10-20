@@ -4,12 +4,9 @@ const deleteListItem = (ulItem) => {
 };
 
 //step 7
-const updateListItem = (ulItem, btnDelete, btnUpdate) => {
+const updateListItem = (liText) => {
   newItem = prompt("what the name of new task?");
-  console.log(newItem);
-  ulItem.innerHTML = newItem;
-  ulItem.append(btnDelete);
-  ulItem.append(btnUpdate);
+  liText.innerHTML = newItem;
 };
 
 //step 1
@@ -30,20 +27,28 @@ const renderList = () => {
   toDos.forEach((item) => {
     const btnDelete = document.createElement("button");
     btnDelete.innerHTML = "delete";
+    btnDelete.style.marginLeft = "2rem";
+    btnDelete.className = "btn btn-danger btn-sm";
 
     const btnUpdate = document.createElement("button");
     btnUpdate.innerHTML = "update";
+    btnUpdate.style.marginLeft = "2rem";
+    btnUpdate.classList = "btn btn-success btn-sm";
+
+    const liText = document.createElement("p");
+    liText.innerHTML = item;
+    liText.style.display = "inline";
+    liText.className = "col-md-2";
 
     const ulItem = document.createElement("li");
-    ulItem.innerHTML = item;
+
+    ulItem.append(liText);
     ulItem.append(btnDelete);
     ulItem.append(btnUpdate);
     ulList.append(ulItem);
 
     btnDelete.addEventListener("click", () => deleteListItem(ulItem));
-    btnUpdate.addEventListener("click", () =>
-      updateListItem(ulItem, btnDelete, btnUpdate)
-    );
+    btnUpdate.addEventListener("click", () => updateListItem(liText));
   });
 };
 
@@ -51,8 +56,14 @@ renderList();
 
 //step 5
 const input = document.createElement("input");
+input.style.margin = " 0.5rem 1rem "
+input.className = "col-md-2";
+input.placeholder = "enter new to do hear "
+
 const button = document.createElement("button");
 button.innerHTML = "add toDo";
+button.style.marginLeft = "2rem";
+button.className = "btn btn-primary";
 
 body.append(input);
 body.append(button);
@@ -61,23 +72,29 @@ const addToList = () => {
   if (input.value == "") {
     alert("pleas inter input");
   } else {
-    const ulItem = document.createElement("li");
-    ulItem.innerHTML = input.value;
-
     const btnDelete = document.createElement("button");
     btnDelete.innerHTML = "delete";
+    btnDelete.style.marginLeft = "2rem";
+    btnDelete.className = "btn btn-danger btn-sm";
 
     const btnUpdate = document.createElement("button");
     btnUpdate.innerHTML = "update";
+    btnUpdate.style.marginLeft = "2rem";
+    btnUpdate.classList = "btn btn-success btn-sm";
 
+    const liText = document.createElement("p");
+    liText.innerHTML = input.value;
+    liText.style.display = "inline";
+    liText.className = "col-md-2";
+
+    const ulItem = document.createElement("li");
+    ulItem.append(liText);
     ulItem.append(btnDelete);
     ulItem.append(btnUpdate);
     ulList.append(ulItem);
 
     btnDelete.addEventListener("click", () => deleteListItem(ulItem));
-    btnUpdate.addEventListener("click", () =>
-      updateListItem(ulItem, btnDelete, btnUpdate)
-    );
+    btnUpdate.addEventListener("click", () => updateListItem(liText));
   }
 };
 

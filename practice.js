@@ -1,12 +1,15 @@
 //step 3
+const cheakToDo = JSON.parse(localStorage.getItem("list item"));
 const toDos = [];
 
-if (JSON.parse(localStorage.getItem("list item")) == null) {
+if (cheakToDo == null) {
   toDos[0] = "wake up";
-} else if (toDos[0] == null) {
-  toDos.splice(0, 1, "wake up");
+// } else if (toDos[0] == null) {
+//   toDos.splice(0, 1, "wake up");
 } else {
-  toDos = JSON.parse(localStorage.getItem("list item"));
+  cheakToDo.forEach((item) => {
+    toDos.push(item)
+  })
 }
 
 //step 6
@@ -14,7 +17,9 @@ const deleteListItem = (ulItem, liText) => {
   ulItem.remove();
 
   toDos.forEach((item, index) => {
-    if (item === liText.innerHTML) {
+    if(item === undefined){
+
+    }else if (item === liText.innerHTML) {
       toDos.splice(index, 1);
       localStorage.setItem("list item", JSON.stringify(toDos));
     }
